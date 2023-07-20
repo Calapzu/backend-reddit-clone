@@ -1,14 +1,12 @@
 package com.calapzu.redditclone.model;
 
-import jakarta.annotation.Nullable;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.Instant;
 
-import static jakarta.persistence.FetchType.LAZY;
-import static jakarta.persistence.GenerationType.IDENTITY;
+
 
 @Getter
 @Setter
@@ -19,20 +17,19 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     private String postName;
     private String url;
-    @Nullable
     @Lob
     private String description;
-    private Integer voteCount;
-    @ManyToOne(fetch = LAZY)
+    private Integer voteCount = 0;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
     private Instant createdDate;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id")
-    private Subreddit subreddit;
+    private SubReddit subreddit;
 
 }

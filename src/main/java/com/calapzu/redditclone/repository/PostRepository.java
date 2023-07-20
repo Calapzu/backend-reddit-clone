@@ -1,8 +1,17 @@
 package com.calapzu.redditclone.repository;
 
-import com.calapzu.redditclone.model.Post;
-import org.hibernate.boot.model.convert.spi.JpaAttributeConverterCreationContext;
-import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.calapzu.redditclone.model.Post;
+import com.calapzu.redditclone.model.SubReddit;
+import com.calapzu.redditclone.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> findAllBySubreddit(SubReddit subReddit);
+
+    List<Post> findByUser(User user);
 }
